@@ -3,6 +3,10 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "dev": "bun --env-file=.env.local index.ts",
+    "prod": "bun --env-file=.env.production index.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/express": "^5.0.6"
@@ -11,6 +15,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "dotenv": "^18.0.4",
     "express": "^5.2.1"
   }
 }
