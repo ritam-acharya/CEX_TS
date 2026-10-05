@@ -1,11 +1,8 @@
 import express from "express";
 import type { Response, Request } from "express";
 import dotenv from "dotenv";
-import { signupSchema } from "./schema/zodSchema";
 import { users } from "./constants";
-import { errorResponse, sucessresponse } from "./utils/response";
-import bcrypt from "bcrypt";
-import { getId, increaseId } from "./utils/config";
+import { signup } from "./controllers/signup";
 
 
 dotenv.config();
@@ -19,7 +16,7 @@ app.get("/health", (req, res) => {
 
 
 app.post("/signup", async (req: Request, res: Response) => {
-    
+    signup(req, res, users);
 });
 
 

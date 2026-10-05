@@ -9,8 +9,8 @@ import bcrypt from "bcrypt";
 export async function signup(req: Request, res: Response, users: User[]) {
     const parsedData = signupSchema.safeParse(req.body);
     if (!parsedData.success) {
-        console.log(parsedData.error);
-        return errorResponse(res, 400, parsedData.error.message);
+        console.log(parsedData.error.issues[0]?.message);
+        return errorResponse(res, 400, parsedData.error.issues[0]?.message!);
     }
 
     const {email, password} = parsedData.data;
