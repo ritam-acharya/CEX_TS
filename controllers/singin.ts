@@ -14,12 +14,15 @@ export async function signin(req: Request, res: Response, users: User[]) {
     }
 
     const {email, password} = parsedData.data;
-    let existingUser = users.find(async (u) => {
-        return u.email === email && await bcrypt.compare(password, u.password)
-    });
+    let existingUser = users.find((u) => u.email === email);
 
     if (!existingUser) {
         return errorResponse(res, 404, "User not found");
+    }
+
+    const correctPassword = await bcrypt.compare(password, existingUser.password);
+    if (!correctPassword) {
+        return errorResponse(res, 401, "Invalid password!");
     }
 
     const token = generateToken(existingUser);

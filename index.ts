@@ -3,6 +3,8 @@ import type { Response, Request } from "express";
 import dotenv from "dotenv";
 import { users } from "./constants";
 import { signup } from "./controllers/signup";
+import { signin } from "./controllers/singin";
+import { auth } from "./middlewares/auth";
 
 
 dotenv.config();
@@ -17,6 +19,19 @@ app.get("/health", (req, res) => {
 
 app.post("/signup", async (req: Request, res: Response) => {
     signup(req, res, users);
+});
+
+
+
+app.post("/signin", async (req: Request, res: Response) => {
+    signin(req, res, users);
+});
+
+
+app.get("/random", auth, (req, res) => {
+    res.status(200).json({
+        message: "welcome"
+    });
 });
 
 

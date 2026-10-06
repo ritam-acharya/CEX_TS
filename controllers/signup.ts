@@ -17,7 +17,6 @@ export async function signup(req: Request, res: Response, users: User[]) {
 
     // check if the user already exist
     let existingUser = users.find((u) => u.email === email);
-    console.log(existingUser);
 
     if (existingUser) {
         return errorResponse(res, 409, "User already exist");

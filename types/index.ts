@@ -5,3 +5,7 @@ export type User = {
     password: string
 }
 
+export type jwtPayload = {
+    id: number,
+    email: string
+}
